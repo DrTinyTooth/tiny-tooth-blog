@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Tiny Tooth Care Blog by TinyToothDr</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --mint: #a8d5ba;
+    --mint-light: #d6f0e2;
+    --mint-dark: #5fa882;
+    --cream: #fdf8f0;
+    --warm-white: #fffef9;
+    --blush: #f4a5b0;
+    --blush-light: #fde8eb;
+    --sky: #a3c9e8;
+    --sky-light: #ddf0fb;
+    --butter: #f9e4a0;
+    --butter-light: #fdf5d4;
+    --deep: #2d3a32;
+    --mid: #4a5e52;
+    --soft: #7a9080;
+    --accent: #e85d6a;
+    --tag-bg: #e8f5ee;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+font-family: ‘DM Sans’, sans-serif;
+background: var(–cream);
+color: var(–deep);
+line-height: 1.7;
+overflow-x: hidden;
+}
+
+/* ── HEADER ── */
+header {
+background: var(–warm-white);
+border-bottom: 2px solid var(–mint-light);
+position: sticky; top: 0; z-index: 100;
+padding: 0 2rem;
+}
+.nav-inner {
+max-width: 1200px; margin: 0 auto;
+display: flex; align-items: center; justify-content: space-between;
+height: 68px;
+}
+.logo {
+display: flex; align-items: center; gap: 10px; text-decoration: none;
+}
+.logo-icon {
+width: 42px; height: 42px;
+background: var(–mint);
+border-radius: 50%;
+display: flex; align-items: center; justify-content: center;
+font-size: 22px;
+}
+.logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+.logo-main { font-family: ‘Playfair Display’, serif; font-size: 1.15rem; color: var(–deep); font-weight: 700; }
+.logo-sub { font-family: ‘Caveat’, cursive; font-size: 0.85rem; color: var(–soft); }
+nav a {
+text-decoration: none; color: var(–mid); font-size: 0.9rem; font-weight: 500;
+margin-left: 1.8rem; transition: color 0.2s;
+}
+nav a:hover { color: var(–mint-dark); }
+
+/* ── HERO ── */
+.hero {
+background: linear-gradient(135deg, #e8f5ee 0%, #fdf5d4 40%, #fde8eb 100%);
+padding: 80px 2rem 60px;
+text-align: center;
+position: relative; overflow: hidden;
+}
+.hero::before {
+content: ‘🦷’; font-size: 220px; opacity: 0.06;
+position: absolute; top: -30px; right: -20px; pointer-events: none;
+}
+.hero-badge {
+display: inline-block;
+background: var(–mint); color: var(–deep);
+font-family: ‘Caveat’, cursive; font-size: 1rem;
+padding: 4px 18px; border-radius: 20px; margin-bottom: 20px;
+}
+.hero h1 {
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(2.2rem, 5vw, 3.6rem);
+color: var(–deep); line-height: 1.2; margin-bottom: 16px;
+max-width: 720px; margin-left: auto; margin-right: auto;
+}
+.hero h1 em { font-style: italic; color: var(–mint-dark); }
+.hero p {
+font-size: 1.05rem; color: var(–mid); max-width: 560px;
+margin: 0 auto 32px; font-weight: 300;
+}
+.hero-pills { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.pill {
+background: white; border: 1.5px solid var(–mint);
+color: var(–mid); font-size: 0.82rem; font-weight: 500;
+padding: 6px 16px; border-radius: 20px;
+}
+
+/* ── FILTER BAR ── */
+.filter-bar {
+max-width: 1200px; margin: 40px auto 0; padding: 0 2rem;
+display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+}
+.filter-label { font-size: 0.8rem; color: var(–soft); font-weight: 500; margin-right: 4px; }
+.filter-btn {
+background: white; border: 1.5px solid #dde8e3;
+color: var(–mid); font-size: 0.82rem; font-weight: 500;
+padding: 6px 16px; border-radius: 20px; cursor: pointer;
+transition: all 0.2s; font-family: ‘DM Sans’, sans-serif;
+}
+.filter-btn:hover, .filter-btn.active {
+background: var(–mint-dark); border-color: var(–mint-dark); color: white;
+}
+
+/* ── BLOG GRID ── */
+.grid-wrap { max-width: 1200px; margin: 32px auto 0; padding: 0 2rem 80px; }
+.blog-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+gap: 28px;
+}
+
+/* ── CARD ── */
+.card {
+background: white;
+border-radius: 20px;
+overflow: hidden;
+box-shadow: 0 2px 16px rgba(45,58,50,0.07);
+transition: transform 0.25s, box-shadow 0.25s;
+cursor: pointer;
+display: flex; flex-direction: column;
+}
+.card:hover {
+transform: translateY(-6px);
+box-shadow: 0 12px 36px rgba(45,58,50,0.13);
+}
+.card-thumb {
+height: 180px;
+display: flex; align-items: center; justify-content: center;
+font-size: 72px; position: relative; overflow: hidden;
+flex-shrink: 0;
+}
+.card-thumb::after {
+content: ‘’; position: absolute; inset: 0;
+background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.06));
+}
+.card-body { padding: 22px 24px 24px; flex: 1; display: flex; flex-direction: column; }
+.card-category {
+display: inline-block;
+font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+padding: 3px 10px; border-radius: 10px; margin-bottom: 10px;
+}
+.card h2 {
+font-family: ‘Playfair Display’, serif; font-size: 1.12rem;
+color: var(–deep); line-height: 1.4; margin-bottom: 10px;
+}
+.card p {
+font-size: 0.88rem; color: var(–mid); line-height: 1.65;
+flex: 1; margin-bottom: 18px;
+}
+.card-footer {
+display: flex; align-items: center; justify-content: space-between;
+border-top: 1px solid #f0f4f2; padding-top: 14px;
+}
+.card-meta { font-size: 0.75rem; color: var(–soft); }
+.read-btn {
+font-size: 0.78rem; font-weight: 600; color: var(–mint-dark);
+text-decoration: none; display: flex; align-items: center; gap: 4px;
+background: var(–tag-bg); padding: 6px 14px; border-radius: 20px;
+transition: background 0.2s;
+}
+.read-btn:hover { background: var(–mint-light); }
+
+/* ── MODAL ── */
+.modal-overlay {
+position: fixed; inset: 0; background: rgba(30,40,34,0.55);
+backdrop-filter: blur(4px); z-index: 200;
+display: none; align-items: center; justify-content: center; padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+background: white; border-radius: 24px;
+max-width: 720px; width: 100%; max-height: 88vh; overflow-y: auto;
+box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+animation: slideUp 0.3s ease;
+}
+@keyframes slideUp {
+from { opacity: 0; transform: translateY(30px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+.modal-hero {
+height: 200px; display: flex; align-items: center; justify-content: center;
+font-size: 90px; position: relative;
+}
+.modal-close {
+position: absolute; top: 16px; right: 16px;
+width: 36px; height: 36px; border-radius: 50%;
+background: white; border: none; cursor: pointer;
+font-size: 18px; display: flex; align-items: center; justify-content: center;
+box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: transform 0.2s;
+}
+.modal-close:hover { transform: rotate(90deg); }
+.modal-content { padding: 28px 32px 36px; }
+.modal-category {
+display: inline-block; font-size: 0.72rem; font-weight: 600;
+letter-spacing: 0.08em; text-transform: uppercase;
+padding: 3px 10px; border-radius: 10px; margin-bottom: 12px;
+}
+.modal-content h1 {
+font-family: ‘Playfair Display’, serif; font-size: 1.75rem;
+color: var(–deep); line-height: 1.3; margin-bottom: 8px;
+}
+.modal-meta { font-size: 0.8rem; color: var(–soft); margin-bottom: 24px; }
+.modal-body { font-size: 0.95rem; color: var(–mid); line-height: 1.85; }
+.modal-body h3 {
+font-family: ‘Playfair Display’, serif; font-size: 1.1rem;
+color: var(–deep); margin: 22px 0 8px;
+}
+.modal-body ul { padding-left: 1.4rem; margin: 10px 0; }
+.modal-body ul li { margin-bottom: 6px; }
+.modal-body .tip-box {
+background: var(–mint-light); border-left: 4px solid var(–mint-dark);
+border-radius: 0 12px 12px 0; padding: 14px 18px; margin: 20px 0;
+font-size: 0.9rem;
+}
+.modal-body .tip-box strong { color: var(–deep); }
+
+/* ── FOOTER ── */
+footer {
+background: var(–deep); color: rgba(255,255,255,0.6);
+text-align: center; padding: 40px 2rem;
+font-size: 0.85rem; line-height: 1.8;
+}
+footer strong { color: rgba(255,255,255,0.9); }
+footer a { color: var(–mint); text-decoration: none; }
+
+/* ── HIDDEN CARD ── */
+.card.hidden { display: none; }
+
+@media (max-width: 600px) {
+.nav-inner nav { display: none; }
+.modal-content { padding: 20px; }
+.modal-content h1 { font-size: 1.4rem; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- HEADER -->
+
+<header>
+  <div class="nav-inner">
+    <a class="logo" href="#">
+      <div class="logo-icon">🦷</div>
+      <div class="logo-text">
+        <span class="logo-main">The Tiny Tooth Care Blog</span>
+        <span class="logo-sub">by TinyToothDr</span>
+      </div>
+    </a>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Blogs</a>
+      <a href="#">Oral Health</a>
+      <a href="#">Metabolic</a>
+      <a href="#">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+  <div class="hero-badge">✨ The Tiny Tooth Care Blog by TinyToothDr</div>
+  <h1>Bright Smiles &<br><em>Healthy Little Bodies</em></h1>
+  <p>Expert insights on infant & child oral health, metabolic connections, and raising cavity-free, thriving kids.</p>
+  <div class="hero-pills">
+    <span class="pill">🍼 Infant Oral Care</span>
+    <span class="pill">🧬 Metabolism & Teeth</span>
+    <span class="pill">😴 Bedtime Routines</span>
+    <span class="pill">🥦 Nutrition Tips</span>
+    <span class="pill">👶 Special Needs</span>
+  </div>
+</section>
+
+<!-- FILTER -->
+
+<div class="filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" data-cat="all">All Posts</button>
+  <button class="filter-btn" data-cat="infant">Infant Care</button>
+  <button class="filter-btn" data-cat="metabolic">Metabolic</button>
+  <button class="filter-btn" data-cat="nutrition">Nutrition</button>
+  <button class="filter-btn" data-cat="habits">Habits</button>
+  <button class="filter-btn" data-cat="special">Special Needs</button>
+</div>
+
+<!-- BLOG GRID -->
+
+<div class="grid-wrap">
+  <div class="blog-grid" id="blogGrid"></div>
+</div>
+
+<!-- MODAL -->
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <div class="modal-hero" id="modalHero"></div>
+    <div class="modal-content">
+      <div class="modal-category" id="modalCat"></div>
+      <h1 id="modalTitle"></h1>
+      <div class="modal-meta" id="modalMeta"></div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+  <p><strong>The Tiny Tooth Care Blog</strong></p>
+  <p>by TinyToothDr · Pediatric Dental Consultancy · Special Child Support</p>
+  <p style="margin-top:12px">
+    <a href="https://tinytoothtidytales.my.canva.site/pediatric-dental-consultancy-special-child-support-bedtime-stories-kids-dental-tips" target="_blank">Visit Our Canva Site</a>
+    &nbsp;·&nbsp; Made with 🦷 and 💚
+  </p>
+  <p style="margin-top:10px; font-size:0.75rem; opacity:0.5">This blog is for educational purposes. Always consult a qualified pediatric dentist for personal advice.</p>
+</footer>
+
+<script>
+const blogs = [
+  {
+    id: 1, cat: "infant",
+    emoji: "🍼", bg: "linear-gradient(135deg,#d6f0e2,#a8d5ba)",
+    catLabel: "Infant Care", catColor: "#2d7a52", catBg: "#d6f0e2",
+    date: "April 5, 2025", readTime: "5 min read",
+    title: "When Should Baby's First Dental Visit Be? Earlier Than You Think",
+    excerpt: "Most parents wait until toddlerhood — but the first dental visit should happen by baby's first tooth or first birthday. Here's why early is everything.",
+    content: `
+      <p>The American Academy of Pediatric Dentistry (AAPD) recommends that a child's first dental visit occur <strong>within 6 months of the eruption of the first tooth, and no later than the child's first birthday</strong>. Yet surveys consistently show that most parents first bring their child to the dentist around age 3 — by which point early decay can already be underway.</p>
+
+      <h3>Why So Early?</h3>
+      <p>Infants are susceptible to a particular form of tooth decay called <em>Early Childhood Caries (ECC)</em>, previously known as "baby bottle tooth decay." Despite the name, it's not just about bottles — it involves any frequent, prolonged exposure of teeth to fermentable carbohydrates.</p>
+
+      <h3>What Happens at a First Visit?</h3>
+      <ul>
+        <li>Risk assessment for early decay</li>
+        <li>Guidance on feeding and weaning</li>
+        <li>Discussion of fluoride needs</li>
+        <li>Oral habits counseling (pacifiers, thumb-sucking)</li>
+        <li>Parent education on infant gum and tooth cleaning</li>
+      </ul>
+
+      <h3>Before the First Tooth</h3>
+      <p>Even before teeth appear, parents should gently wipe baby's gums with a clean, damp cloth after feedings. This establishes a healthy oral hygiene routine and reduces bacterial load in the mouth.</p>
+
+      <div class="tip-box">
+        <strong>🌟 Pro Tip:</strong> The first visit is as much for you (the parent) as for your baby. Come with questions! Your pediatric dentist is your partner in your child's lifelong oral health journey.
+      </div>
+
+      <h3>The Dental Home Concept</h3>
+      <p>Establishing a "dental home" early means your child has a trusted relationship with a dental team before any urgent problem arises. Children who have a dental home are significantly more likely to receive appropriate preventive care throughout childhood.</p>
+    `
+  },
+  {
+    id: 2, cat: "metabolic",
+    emoji: "🧬", bg: "linear-gradient(135deg,#ddf0fb,#a3c9e8)",
+    catLabel: "Metabolic Health", catColor: "#1a5c8a", catBg: "#ddf0fb",
+    date: "April 12, 2025", readTime: "7 min read",
+    title: "The Mouth–Metabolism Link: How Oral Health Shapes Your Child's Whole Body",
+    excerpt: "The connection between your child's mouth and their metabolic health is deeper than you'd expect. Inflammation, gut bacteria, and insulin sensitivity all start with oral health.",
+    content: `
+      <p>Emerging research in pediatric medicine is revealing a profound two-way relationship between oral health and systemic metabolic function. The mouth is not just a gateway for food — it is an active participant in your child's metabolic ecosystem.</p>
+
+      <h3>The Oral-Systemic Axis</h3>
+      <p>Periodontitis (gum disease) and caries (tooth decay) both trigger systemic inflammatory responses. In children, chronic low-grade oral inflammation can affect:</p>
+      <ul>
+        <li>Insulin sensitivity and blood sugar regulation</li>
+        <li>Gut microbiome composition</li>
+        <li>Immune system calibration</li>
+        <li>Cardiovascular risk markers</li>
+      </ul>
+
+      <h3>Oral Bacteria and the Gut</h3>
+      <p>The oral cavity hosts over 700 species of bacteria — the second-most diverse microbial community in the body after the gut. When harmful bacteria such as <em>Streptococcus mutans</em> dominate, they can travel to the gut and disrupt microbial balance, a phenomenon called <em>oral-gut dysbiosis</em>.</p>
+
+      <div class="tip-box">
+        <strong>🔬 Research Insight:</strong> A 2022 study in the Journal of Oral Microbiology found that children with untreated caries had measurably higher systemic inflammatory markers, including elevated CRP levels — a marker also associated with insulin resistance.
+      </div>
+
+      <h3>Blood Sugar and Cavity Risk</h3>
+      <p>High-sugar diets that fuel cavities also spike blood glucose repeatedly throughout the day. Over time, this pattern stresses the pancreatic beta cells and can contribute to insulin dysregulation — particularly in children with a family history of type 2 diabetes.</p>
+
+      <h3>What Parents Can Do</h3>
+      <ul>
+        <li>Limit free sugars to less than 5% of daily caloric intake (WHO recommendation)</li>
+        <li>Prioritize whole foods that buffer blood glucose</li>
+        <li>Maintain consistent oral hygiene to reduce systemic bacterial load</li>
+        <li>Discuss family metabolic history with your child's dental team</li>
+      </ul>
+    `
+  },
+  {
+    id: 3, cat: "infant",
+    emoji: "🤱", bg: "linear-gradient(135deg,#fde8eb,#f4a5b0)",
+    catLabel: "Infant Care", catColor: "#a0283a", catBg: "#fde8eb",
+    date: "April 19, 2025", readTime: "6 min read",
+    title: "Breastfeeding & Baby Teeth: What Every Nursing Mom Needs to Know",
+    excerpt: "Breastfeeding is best for babies in countless ways — but its relationship with oral health is nuanced. Let's separate myth from evidence.",
+    content: `
+      <p>Breastfeeding confers extraordinary benefits to infants — immunological, nutritional, and developmental. But when it comes to teeth, the conversation is more nuanced than many parents expect.</p>
+
+      <h3>The Good News</h3>
+      <p>Human breastmilk contains <em>lactoferrin</em>, an antimicrobial protein that inhibits the growth of <em>Streptococcus mutans</em>, the primary cavity-causing bacterium. Breastfed children often have healthier oral microbiomes than formula-fed infants, especially in the first 6 months.</p>
+
+      <h3>When Duration and Frequency Matter</h3>
+      <p>Despite these protective properties, prolonged, on-demand nighttime nursing after the eruption of teeth can increase caries risk. Here's why: during sleep, saliva production drops significantly. Without the cleansing action of saliva, milk pooling around teeth for extended periods provides a substrate for bacterial acid production.</p>
+
+      <div class="tip-box">
+        <strong>💡 Key Distinction:</strong> The research does not suggest weaning — it suggests attention to <em>oral hygiene after nighttime feeds</em>. Gently wiping teeth with a damp cloth after the last nighttime feed is a practical solution.
+      </div>
+
+      <h3>Practical Guidance</h3>
+      <ul>
+        <li>Clean baby's teeth and gums after every feed, including night feeds</li>
+        <li>Introduce a cup by 12 months to reduce prolonged teat contact</li>
+        <li>Don't put baby to sleep latched on through the night after teeth appear</li>
+        <li>Start fluoride varnish applications at first tooth eruption if recommended by your dentist</li>
+      </ul>
+
+      <h3>The Role of Maternal Oral Health</h3>
+      <p>Mothers can transmit cavity-causing bacteria to their infants through saliva sharing — kissing on the mouth, sharing spoons, or licking a pacifier to clean it. Maintaining your own excellent oral health during pregnancy and nursing is a powerful gift to your child.</p>
+    `
+  },
+  {
+    id: 4, cat: "metabolic",
+    emoji: "🍭", bg: "linear-gradient(135deg,#fdf5d4,#f9e4a0)",
+    catLabel: "Metabolic Health", catColor: "#8a6200", catBg: "#fdf5d4",
+    date: "April 26, 2025", readTime: "8 min read",
+    title: "Sugar, Cavities & Insulin: The Triangle Every Parent Must Understand",
+    excerpt: "Sugar doesn't just cause cavities — it trains your child's body to crave more sugar, spikes insulin, and sets metabolic patterns that can last a lifetime.",
+    content: `
+      <p>When we talk about sugar and children's health, we usually discuss it in silos: dentists warn about cavities; pediatricians warn about obesity and diabetes. But the reality is that these are not separate conversations — they are the same conversation.</p>
+
+      <h3>How Sugar Causes Cavities</h3>
+      <p>Bacteria in the mouth — primarily <em>Streptococcus mutans</em> — ferment dietary sugars and produce lactic acid as a byproduct. This acid demineralizes tooth enamel. With repeated sugar exposure throughout the day, the enamel never has time to remineralize, and a cavity forms.</p>
+
+      <h3>How Sugar Affects Metabolism</h3>
+      <p>Each sugar exposure doesn't just feed oral bacteria — it also raises blood glucose and triggers an insulin response. In children who eat frequently sweetened foods or drinks throughout the day, insulin is chronically elevated. Over years, this can:</p>
+      <ul>
+        <li>Reduce insulin sensitivity (a precursor to type 2 diabetes)</li>
+        <li>Drive fat storage and weight gain</li>
+        <li>Increase systemic inflammation</li>
+        <li>Disrupt hunger and satiety hormones (leptin and ghrelin)</li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>📊 By the Numbers:</strong> The WHO recommends that free sugars make up less than 5% of total energy intake for children — roughly 15–20g per day. A single 200ml juice box often contains 18–22g of sugar alone.
+      </div>
+
+      <h3>The Frequency Problem</h3>
+      <p>For both cavity prevention and metabolic health, <em>frequency of sugar exposure matters as much as total quantity</em>. Sipping juice throughout the morning is far more damaging — dentally and metabolically — than having one glass with breakfast.</p>
+
+      <h3>Practical Swaps for Parents</h3>
+      <ul>
+        <li>Replace juice with whole fruit (fiber slows glucose absorption)</li>
+        <li>Offer water as the between-meal drink</li>
+        <li>Time sweet treats to mealtimes, not snack times</li>
+        <li>Choose xylitol-containing gum or mints for school-age children</li>
+      </ul>
+    `
+  },
+  {
+    id: 5, cat: "habits",
+    emoji: "😴", bg: "linear-gradient(135deg,#e8e0f8,#c4b0e8)",
+    catLabel: "Habits & Routines", catColor: "#4a2d8a", catBg: "#e8e0f8",
+    date: "May 3, 2025", readTime: "5 min read",
+    title: "The Bedtime Brush: Making Nighttime Oral Hygiene a Joyful Ritual",
+    excerpt: "Bedtime brushing is the single most important oral hygiene habit a child can build. Here's how to make it stick — even when your toddler says absolutely not.",
+    content: `
+      <p>Of all the oral hygiene habits children can develop, none is more important than <strong>brushing before bed</strong>. During sleep, saliva flow drops dramatically, removing the mouth's natural cleansing mechanism. Bacteria work undisturbed for 6–10 hours unless teeth are clean.</p>
+
+      <h3>Why Nighttime Matters Most</h3>
+      <p>Research consistently shows that children who skip bedtime brushing have significantly higher cavity rates than those who skip morning brushing. The overnight period is when enamel demineralization is most pronounced.</p>
+
+      <h3>Age-by-Age Brushing Guide</h3>
+      <ul>
+        <li><strong>0–2 years:</strong> Parent brushes with a soft infant brush and a smear of fluoride toothpaste (rice grain size)</li>
+        <li><strong>2–5 years:</strong> Parent assists; pea-sized fluoride toothpaste; 2 minutes</li>
+        <li><strong>6–9 years:</strong> Child brushes with parent checking and "finishing"</li>
+        <li><strong>10+ years:</strong> Independent brushing with periodic supervision</li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>🎵 Tip:</strong> Use a 2-minute song specifically for brushing time. Apps like Disney Magic Timer or Brush DJ make timing fun and connect brushing to characters children love.
+      </div>
+
+      <h3>Making It a Ritual, Not a Battle</h3>
+      <p>Children thrive on predictability. Embedding brushing as a non-negotiable part of the bedtime sequence — bath, brush, book, bed — removes it from the realm of negotiation. The battle becomes much smaller when there is no "will we brush tonight?" only "shall we use the star toothbrush or the dinosaur one?"</p>
+
+      <h3>Story-Based Motivation</h3>
+      <p>Bedtime dental stories are a powerful tool for young children. Tales where the child is the hero who defeats the "sugar bugs" with their toothbrush create positive associations with oral care. Look for books like <em>The Tooth Book</em> by Dr. Seuss or <em>Brush, Brush, Brush!</em> by Alicia Padron.</p>
+    `
+  },
+  {
+    id: 6, cat: "metabolic",
+    emoji: "⚖️", bg: "linear-gradient(135deg,#d6eaf8,#a9cce3)",
+    catLabel: "Metabolic Health", catColor: "#1a4f72", catBg: "#d6eaf8",
+    date: "May 10, 2025", readTime: "9 min read",
+    title: "Childhood Obesity and Oral Health: An Overlooked Connection",
+    excerpt: "Children with obesity face unique oral health challenges — from gum inflammation to enamel defects — while oral pain can perpetuate unhealthy eating. The relationship is circular.",
+    content: `
+      <p>The relationship between childhood obesity and oral health is bidirectional and underappreciated. Most parents — and even some clinicians — treat weight and teeth as entirely separate domains. The evidence tells a more integrated story.</p>
+
+      <h3>How Obesity Affects Oral Health</h3>
+      <p>Adipose (fat) tissue is metabolically active — it releases inflammatory cytokines including TNF-α, IL-6, and CRP. In children with obesity, these circulating inflammatory markers promote:</p>
+      <ul>
+        <li><strong>Gingival inflammation</strong> — greater severity of gingivitis for the same plaque levels</li>
+        <li><strong>Periodontal vulnerability</strong> — impaired healing and increased bone resorption risk</li>
+        <li><strong>Salivary changes</strong> — altered salivary composition, reducing natural protection against decay</li>
+        <li><strong>Higher caries rates</strong> — driven by diet pattern, reduced saliva quality, and inflammation</li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>📖 Research:</strong> A 2021 meta-analysis in the <em>Journal of Dentistry for Children</em> found children with obesity were 1.9x more likely to have dental caries compared to healthy-weight peers, independent of dietary sugar intake.
+      </div>
+
+      <h3>How Poor Oral Health Affects Weight</h3>
+      <p>The reverse pathway is equally important. Dental pain changes what and how children eat:</p>
+      <ul>
+        <li>Avoidance of crunchy fruits and vegetables (which require chewing)</li>
+        <li>Preference for soft, processed, calorie-dense foods</li>
+        <li>Reduced appetite for nutritious foods, increasing caloric compensation</li>
+      </ul>
+
+      <h3>A Whole-Child Approach</h3>
+      <p>Effective management of either condition benefits from addressing both. Dental teams treating children with obesity should screen proactively for gum disease. Pediatricians managing childhood weight should routinely ask about dental health and refer to a pediatric dentist.</p>
+    `
+  },
+  {
+    id: 7, cat: "nutrition",
+    emoji: "🥦", bg: "linear-gradient(135deg,#d5f5e3,#82e0aa)",
+    catLabel: "Nutrition", catColor: "#1e6b3c", catBg: "#d5f5e3",
+    date: "May 17, 2025", readTime: "6 min read",
+    title: "Tooth-Friendly Foods: Building a Diet That Protects Little Smiles",
+    excerpt: "The foods your child eats are either protecting or attacking their teeth every day. Here's a science-backed guide to the best (and worst) foods for growing teeth.",
+    content: `
+      <p>Every meal your child eats interacts with their oral environment. Understanding which foods protect teeth — and why — empowers parents to make choices that serve both dental health and overall nutrition simultaneously.</p>
+
+      <h3>Foods That Actively Protect Teeth</h3>
+
+      <h3>🧀 Dairy Products</h3>
+      <p>Cheese, yogurt, and milk contain <em>casein phosphopeptides</em> that bind calcium and phosphate and deposit them directly onto tooth enamel. Cheese in particular is remarkable — it raises oral pH, stimulates saliva, and provides protective minerals in one bite.</p>
+
+      <h3>🥦 Fibrous Vegetables</h3>
+      <p>Carrots, celery, cucumber, and broccoli require vigorous chewing, which stimulates salivary flow — nature's best cavity protector. The fibrous texture also mechanically cleans tooth surfaces.</p>
+
+      <h3>🐟 Fatty Fish & Eggs</h3>
+      <p>Rich in vitamin D, which is essential for calcium absorption and enamel mineralization. Children deficient in vitamin D frequently show signs of enamel hypoplasia — weakened, pitted enamel that is highly decay-prone.</p>
+
+      <div class="tip-box">
+        <strong>🌟 Snack Swap:</strong> Replace crackers and juice with cheese cubes and water. Same satisfaction, dramatically better dental (and metabolic) outcome.
+      </div>
+
+      <h3>Foods to Minimize</h3>
+      <ul>
+        <li><strong>Gummy vitamins</strong> — highly sticky, adhere to grooves, high sugar content</li>
+        <li><strong>Dried fruit</strong> — concentrated sugar, extremely adhesive</li>
+        <li><strong>Fruit juice</strong> — high sugar, no fiber buffer, acidic pH</li>
+        <li><strong>Flavored yogurts</strong> — often contain more sugar than candy</li>
+        <li><strong>Sports drinks</strong> — dual threat: high sugar + high acidity</li>
+      </ul>
+
+      <h3>The Timing Principle</h3>
+      <p>If a food is less than ideal, timing matters. Eating sugary or acidic foods <em>with meals</em> (rather than as standalone snacks) significantly reduces their damage, because the increased salivary flow during meals buffers acid and helps rinse the mouth.</p>
+    `
+  },
+  {
+    id: 8, cat: "special",
+    emoji: "💙", bg: "linear-gradient(135deg,#d6eaf8,#a8c9e8)",
+    catLabel: "Special Needs", catColor: "#1a4472", catBg: "#d6eaf8",
+    date: "May 24, 2025", readTime: "8 min read",
+    title: "Dental Care for Children with Autism: A Compassionate, Step-by-Step Guide",
+    excerpt: "Children with autism spectrum disorder face unique sensory and behavioral challenges at the dentist. With the right preparation, every child can have a positive dental experience.",
+    content: `
+      <p>Dental care for children with Autism Spectrum Disorder (ASD) requires thoughtful preparation, flexibility, and a trauma-informed approach. With the right strategies, most children with ASD can tolerate and even enjoy dental visits.</p>
+
+      <h3>Understanding the Challenges</h3>
+      <p>Children with ASD may experience dental visits as overwhelming due to:</p>
+      <ul>
+        <li><strong>Sensory sensitivities:</strong> Sounds of the drill, light in their eyes, tastes of dental products, textures in the mouth</li>
+        <li><strong>Disrupted routine:</strong> The unpredictability of a dental environment</li>
+        <li><strong>Communication differences:</strong> Difficulty expressing discomfort or understanding instructions</li>
+        <li><strong>Proprioceptive needs:</strong> Anxiety from lack of physical grounding</li>
+      </ul>
+
+      <h3>Preparation Strategies</h3>
+      <p>Begin preparing your child <em>weeks before</em> the appointment:</p>
+      <ul>
+        <li>Use social stories — picture sequences showing exactly what will happen at the dental visit</li>
+        <li>Watch child-friendly videos about dental visits on YouTube</li>
+        <li>Practice "playing dentist" at home with a flashlight and toothbrush</li>
+        <li>Visit the dental office before the appointment just to say hello, with no treatment</li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>💙 Ask the Dental Team:</strong> Request a pre-visit tour, discuss sensory accommodations in advance (weighted blankets, sunglasses, noise-cancelling headphones), and ask whether the practice has experience with ASD patients. Many pediatric dental practices offer dedicated ASD-friendly appointment slots with reduced noise and waiting.
+      </div>
+
+      <h3>At-Home Oral Hygiene for ASD</h3>
+      <ul>
+        <li>Use a consistent brushing routine at the same time each day</li>
+        <li>Start with sensory desensitization: finger brush before introducing toothbrush</li>
+        <li>Experiment with toothpaste flavors — unflavored options exist</li>
+        <li>Vibrating toothbrushes are often preferred for proprioceptive input</li>
+        <li>Visual timers help children understand how long brushing lasts</li>
+      </ul>
+    `
+  },
+  {
+    id: 9, cat: "infant",
+    emoji: "🦷", bg: "linear-gradient(135deg,#fef9e7,#fde68a)",
+    catLabel: "Infant Care", catColor: "#7d4a00", catBg: "#fef9e7",
+    date: "June 1, 2025", readTime: "5 min read",
+    title: "Teething Demystified: What's Normal, What's Not, and How to Help",
+    excerpt: "Drool, fussiness, and sleepless nights — teething is real! But myths abound. Learn the evidence on what teething does (and doesn't) cause, and safe ways to help.",
+    content: `
+      <p>Teething begins around 6 months and continues until approximately age 3, with 20 primary teeth eventually erupting. It's one of the most talked-about milestones in infant development — and one of the most misunderstood.</p>
+
+      <h3>What Teething Can Cause</h3>
+      <ul>
+        <li>Increased drooling (from 3–4 months — even before teeth)</li>
+        <li>Gum soreness and swelling around the erupting tooth</li>
+        <li>Irritability and disrupted sleep — particularly in the 3–5 days around eruption</li>
+        <li>Mild facial rash from excessive drooling</li>
+        <li>Increased biting and chewing behaviors</li>
+      </ul>
+
+      <h3>What Teething Does NOT Cause</h3>
+      <p>A landmark 2016 systematic review in <em>Pediatrics</em> confirmed that teething does NOT cause:</p>
+      <ul>
+        <li>High fever (above 38°C / 100.4°F)</li>
+        <li>Diarrhea</li>
+        <li>Bronchitis or respiratory symptoms</li>
+        <li>Serious illness of any kind</li>
+      </ul>
+      <p>If your child has these symptoms during a teething period, please see your pediatrician — these are signs of an infection unrelated to teeth.</p>
+
+      <div class="tip-box">
+        <strong>⚠️ Safety Warning:</strong> Avoid teething gels containing benzocaine, as these can cause a rare but serious condition called methemoglobinemia. Similarly, amber teething necklaces pose a strangulation and choking hazard — no regulatory authority recommends them.
+      </div>
+
+      <h3>Safe Teething Remedies</h3>
+      <ul>
+        <li>Cold (not frozen) silicone teethers — chilled in the fridge, not freezer</li>
+        <li>Clean, wet, chilled washcloth for baby to chew</li>
+        <li>Gentle gum massage with a clean finger</li>
+        <li>Age-appropriate pain relief (paracetamol or ibuprofen) as directed by your doctor for significant distress</li>
+      </ul>
+    `
+  },
+  {
+    id: 10, cat: "metabolic",
+    emoji: "🩺", bg: "linear-gradient(135deg,#fde8f0,#f8b4cc)",
+    catLabel: "Metabolic Health", catColor: "#8a1a4a", catBg: "#fde8f0",
+    date: "June 8, 2025", readTime: "7 min read",
+    title: "Type 1 Diabetes and Children's Oral Health: What Dental Teams Need to Know",
+    excerpt: "Children with Type 1 diabetes face heightened oral health risks — from accelerated gum disease to dry mouth. Careful management can prevent serious complications.",
+    content: `
+      <p>Type 1 Diabetes Mellitus (T1DM) in children is an autoimmune condition affecting approximately 1 in 300 children by age 18. Its systemic effects extend deeply into oral health, making integrated dental-medical care essential.</p>
+
+      <h3>Why Diabetes Affects the Mouth</h3>
+      <p>Elevated blood glucose creates several oral health risks:</p>
+      <ul>
+        <li><strong>Elevated glucose in saliva</strong> — providing a rich substrate for decay-causing bacteria</li>
+        <li><strong>Reduced salivary flow (xerostomia)</strong> — reducing the natural buffering and cleansing of the mouth</li>
+        <li><strong>Impaired immune response</strong> — reducing the ability to fight oral infection</li>
+        <li><strong>Impaired wound healing</strong> — slowing recovery from extractions or other dental procedures</li>
+        <li><strong>Accelerated periodontal disease</strong> — even in young children, gum disease can progress faster</li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>🔄 The Bidirectional Relationship:</strong> Just as diabetes worsens gum disease, gum disease worsens diabetes — by increasing systemic inflammation and impairing glycemic control. Treating gum disease in children with diabetes has been shown to improve HbA1c levels.
+      </div>
+
+      <h3>Management Priorities</h3>
+      <ul>
+        <li>More frequent dental check-ups (every 3–4 months rather than 6)</li>
+        <li>Meticulous plaque control through twice-daily brushing and daily flossing</li>
+        <li>Monitoring for early signs of gum disease at every visit</li>
+        <li>Coordinating dental appointments with glucose stability — avoid treatment when poorly controlled</li>
+        <li>Informing the dental team of current glucose levels, insulin regimen, and hypoglycemic episodes</li>
+      </ul>
+
+      <h3>For Parents: What to Tell the Dental Team</h3>
+      <p>Always bring your child's diabetes management plan to dental appointments. Inform the dentist of recent HbA1c values, current medications, and whether your child has a history of hypoglycemic episodes. Many dental offices can accommodate glucose monitoring during longer procedures.</p>
+    `
+  },
+  {
+    id: 11, cat: "nutrition",
+    emoji: "💧", bg: "linear-gradient(135deg,#e0f7fa,#80deea)",
+    catLabel: "Nutrition", catColor: "#006064", catBg: "#e0f7fa",
+    date: "June 15, 2025", readTime: "5 min read",
+    title: "Water Is a Wonder: Fluoridated Water and Your Child's Dental Protection",
+    excerpt: "Tap water is the simplest, cheapest, and most effective dental intervention available to families. Here's the science behind fluoride and how to make the most of it.",
+    content: `
+      <p>Community water fluoridation has been called one of the ten great public health achievements of the 20th century by the CDC. Yet in an era of filtered water, sparkling water, and bottled water, many children are missing out on this effortless dental protection.</p>
+
+      <h3>How Fluoride Protects Teeth</h3>
+      <p>Fluoride works through three mechanisms:</p>
+      <ul>
+        <li><strong>Remineralization:</strong> Fluoride ions are incorporated into the enamel crystal structure, making it harder and more acid-resistant (as fluorapatite)</li>
+        <li><strong>Inhibition of bacterial enzymes:</strong> Fluoride disrupts the metabolic activity of <em>S. mutans</em>, reducing acid production</li>
+        <li><strong>Enhanced remineralization:</strong> After an acid attack, fluoride accelerates the repair of early lesions</li>
+      </ul>
+
+      <h3>The Role of Tap Water</h3>
+      <p>In most countries with water fluoridation programs, tap water is optimally fluoridated at 0.7 ppm — enough to provide systemic benefit during tooth development and topical benefit with each sip.</p>
+
+      <div class="tip-box">
+        <strong>💡 Simple Habit:</strong> Make tap water the default drink for your child at home and school. Every sip both hydrates and protects. A child who drinks water throughout the day also rinses sugars and acids away with every sip.
+      </div>
+
+      <h3>When Fluoride Supplements Are Needed</h3>
+      <p>If your family uses a water filter that removes fluoride (such as reverse osmosis), or lives in an area with non-fluoridated water, talk to your pediatric dentist about supplements. Fluoride drops, tablets, and varnish applied in-office can compensate effectively.</p>
+
+      <h3>Is Fluoride Safe?</h3>
+      <p>At recommended levels, fluoride is safe and beneficial. Dental fluorosis (faint white streaks on teeth) can occur with excessive fluoride during enamel development — but this is a cosmetic finding and does not affect tooth strength. It is prevented by using age-appropriate amounts of toothpaste and avoiding fluoride supplements in areas with already-fluoridated water.</p>
+    `
+  },
+  {
+    id: 12, cat: "habits",
+    emoji: "🍬", bg: "linear-gradient(135deg,#fce4ec,#f06292)",
+    catLabel: "Habits & Routines", catColor: "#880e4f", catBg: "#fce4ec",
+    date: "June 22, 2025", readTime: "6 min read",
+    title: "Xylitol for Kids: The Sweet Secret That Actually Fights Cavities",
+    excerpt: "Xylitol is a natural sweetener that bacteria cannot ferment — making it actively protective against cavities. Here's how to use it safely and effectively for your child.",
+    content: `
+      <p>In the world of dental prevention, xylitol occupies a unique place: it tastes sweet, but rather than feeding cavity-causing bacteria, it actively disrupts them. For parents looking for evidence-based tools beyond brushing and flossing, xylitol is one of the strongest options available.</p>
+
+      <h3>What Is Xylitol?</h3>
+      <p>Xylitol is a five-carbon sugar alcohol found naturally in many fruits and vegetables — including berries, oats, and mushrooms. Unlike sucrose and glucose, xylitol cannot be fermented by <em>Streptococcus mutans</em>. When bacteria ingest xylitol, it disrupts their energy cycle and causes them to expend energy without benefit — eventually reducing their numbers in the oral biofilm.</p>
+
+      <h3>Evidence for Children</h3>
+      <p>Multiple clinical trials and systematic reviews have found that regular xylitol use in children reduces caries incidence by 30–60%. This effect is seen with both direct xylitol consumption (chewing gum, lozenges) and through maternal use — mothers who regularly chew xylitol gum transmit significantly fewer cariogenic bacteria to their infants.</p>
+
+      <div class="tip-box">
+        <strong>📋 Dosing for Children:</strong> 4–10g of xylitol per day, divided across at least 3 exposures, is the evidence-based target dose. This is achieved through 2–3 pieces of xylitol gum or equivalent lozenges after meals.
+      </div>
+
+      <h3>Age-Appropriate Xylitol Forms</h3>
+      <ul>
+        <li><strong>Under 3 years:</strong> Xylitol wipes or small amounts of xylitol syrup</li>
+        <li><strong>3–5 years:</strong> Xylitol lozenges or small amounts under supervision</li>
+        <li><strong>6+ years:</strong> Xylitol chewing gum (when safe to chew without swallowing)</li>
+        <li><strong>All ages:</strong> Xylitol-containing toothpaste</li>
+      </ul>
+
+      <h3>Safety Note</h3>
+      <p>Xylitol is safe for children in appropriate amounts. However, it is <strong>highly toxic to dogs</strong> — keep all xylitol products safely stored away from pets. Large amounts can cause gastrointestinal discomfort in children too, so introduce gradually and do not exceed 10g/day.</p>
+    `
+  }
+];
+
+// ─── RENDER CARDS ───
+function renderCards(filter = 'all') {
+  const grid = document.getElementById('blogGrid');
+  grid.innerHTML = '';
+  blogs.forEach(b => {
+    if (filter !== 'all' && b.cat !== filter) return;
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-thumb" style="background:${b.bg}">${b.emoji}</div>
+      <div class="card-body">
+        <span class="card-category" style="color:${b.catColor};background:${b.catBg}">${b.catLabel}</span>
+        <h2>${b.title}</h2>
+        <p>${b.excerpt}</p>
+        <div class="card-footer">
+          <span class="card-meta">${b.date} · ${b.readTime}</span>
+          <span class="read-btn">Read →</span>
+        </div>
+      </div>`;
+    card.addEventListener('click', () => openModal(b));
+    grid.appendChild(card);
+  });
+}
+
+// ─── FILTER BUTTONS ───
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderCards(btn.dataset.cat);
+  });
+});
+
+// ─── MODAL ───
+function openModal(b) {
+  document.getElementById('modalHero').style.background = b.bg;
+  document.getElementById('modalHero').innerHTML = `<button class="modal-close" id="closeBtn">✕</button><span style="font-size:90px">${b.emoji}</span>`;
+  document.getElementById('modalCat').textContent = b.catLabel;
+  document.getElementById('modalCat').style.cssText = `color:${b.catColor};background:${b.catBg}`;
+  document.getElementById('modalTitle').textContent = b.title;
+  document.getElementById('modalMeta').textContent = `${b.date} · ${b.readTime}`;
+  document.getElementById('modalBody').innerHTML = b.content;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('closeBtn').addEventListener('click', closeModal);
+}
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('modalOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ─── INIT ───
+renderCards();
+</script>
+
+</body>
+</html>
